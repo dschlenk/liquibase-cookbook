@@ -37,5 +37,10 @@ def initialize(*args)
 end
 
 def connection_url
-  "jdbc:#{adapter}://#{connection[:host]}:#{connection[:port]}/#{connection[:database]}"
+  "jdbc:#{adapter}://#{connection[:host]}:#{connection[:port]}/#{connection[:database]}#{connection_options}"
+end
+
+def connection_options
+  return '' if connection[:options].nil?
+  '?' + connection[:options].join('&')
 end

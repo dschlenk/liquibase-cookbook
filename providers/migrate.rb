@@ -87,7 +87,7 @@ private
       "--driver=#{Shellwords.escape(new_resource.driver)}",
       "--classpath=#{Shellwords.escape(new_resource.classpath)}",
       "--changeLogFile=#{Shellwords.escape(new_resource.change_log_file)}",
-      "--url=#{Shellwords.escape(new_resource.connection_url)}",
+      "--url=#{new_resource.connection_url}",
       "--username=#{Shellwords.escape(new_resource.connection[:username])}",
       "--password=#{Shellwords.escape(new_resource.connection[:password])}"
     ]
