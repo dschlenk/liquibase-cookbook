@@ -40,3 +40,7 @@ adapter                    | Database adapter                                   
 contexts                   | Contexts to run the migrations in                                                                                   | String  | live
 cwd                        | The directory to run the migrations from                                                                            | String  | 
 change_log_properties      | A hash where the keys are property names and the values are property values for substitution into the change log(s) | Hash    | {}
+
+Unless a key named `url` in the `connection` hash is present, the JDBC URL is built from the `adapter` property and the values of `host`, `port`, and `database` in the `connection` property hash.
+If `connection_options` is not `nil`, each key pair is added to the end of the JDBC URL like URL parameters.
+When `url` is present in the `connection` hash, this value is used instead and the value of `adapter` and all other values of keys in `connection` are ignored.

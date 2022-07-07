@@ -24,6 +24,7 @@ actions :run, :force
 attribute :change_log_file,       :kind_of => String, :name_attribute => true
 attribute :jar,                   :kind_of => String
 attribute :connection,            :kind_of => Hash, :required => true
+attribute :connection_options,    :kind_of => Hash
 attribute :classpath,             :kind_of => String, :required => true
 attribute :driver,                :kind_of => String, :default => "com.mysql.jdbc.Driver"
 attribute :adapter,               :kind_of => Symbol, :default => :mysql
@@ -37,10 +38,10 @@ def initialize(*args)
 end
 
 def connection_url
-  connection[:url] || "jdbc:#{adapter}://#{connection[:host]}:#{connection[:port]}/#{connection[:database]}#{connection_options}"
+  connection[:url] || "jdbc:#{adapter}://#{connection[:host]}:#{connection[:port]}/#{connection[:database]}#{build_connection_options}"
 end
 
-def connection_options
-  return '' if connection[:options].nil?
-  '?' + connection[:options].map{|k,v| "#{k}=#{v}" }.join('&')
+def build_connection_options
+  return '' if connection_options.nil?
+  '?' + connection_options.map{|k,v| "#{k}=#{v}" }.join('&')
 end
